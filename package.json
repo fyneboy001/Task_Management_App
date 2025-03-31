@@ -1,0 +1,27 @@
+{
+  "name": "task-management-app",
+  "version": "0.0.1",
+  "description": "Creating a backend of a Task Management Application",
+  "keywords": [
+    "Get",
+    "Create",
+    "Update",
+    "Delete"
+  ],
+  "license": "ISC",
+  "author": "FINEBOY, Rosemary Yole",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.12.1",
+    "nodemon": "^3.1.9"
+  }
+}
