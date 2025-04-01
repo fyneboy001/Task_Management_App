@@ -9,8 +9,9 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  categories: {
-    type: String,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
     required: false,
   },
   deadline: {
@@ -22,11 +23,10 @@ const taskSchema = new mongoose.Schema({
   },
   creatorId: {
     type: mongoose.Types.ObjectId,
-    ref: "User",
     required: true,
   },
 });
 
-const taskModel = mongoose.Schema("Task", taskSchema);
+const taskModel = mongoose.model("Task", taskSchema);
 
 module.exports = taskModel;
