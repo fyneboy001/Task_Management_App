@@ -31,9 +31,12 @@ const createTask = async (req, res) => {
 };
 
 //Function Read all Task created
-const getAllTask = async (req, res) => {
+const getAllUserTask = async (req, res) => {
   try {
-    const allTask = await taskModel.find();
+    const { token } = req.cookies;
+    const { id } = jwt.verify(token, process.env.JWT_SECRET);
+
+    const allTask = await taskModel.find({ creatorId: id });
     res.status(200).json(allTask);
   } catch (error) {
     res.status(500).send("Something went Wrong");
@@ -104,7 +107,7 @@ const deleteTask = async (req, res) => {
 
 module.exports = {
   createTask,
-  getAllTask,
+  getAllUserTask,
   getSingleTask,
   updateTask,
   deleteTask,
