@@ -20,6 +20,7 @@ const createTask = async (req, res) => {
         description,
         category: categoryId,
         deadline,
+        isCompleted,
       },
       { creatorId: id }
     );
