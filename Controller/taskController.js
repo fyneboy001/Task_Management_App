@@ -105,10 +105,48 @@ const deleteTask = async (req, res) => {
   }
 };
 
+// Function to categorize tasks based on deadlines
+function categorizeTasks(tasks) {
+  const today = moment();
+  const categories = {
+    today: [],
+    thisWeek: [],
+    thisMonth: [],
+    nextMonth: [],
+    later: [],
+  };
+
+  tasks.forEach((task) => {
+    const taskDeadline = moment(task.deadline);
+
+    if (taskDeadline.isSame(today, "day")) {
+      categories.today.push(task);
+    } else if (taskDeadline.isSame(today, "week")) {
+      categories.thisWeek.push(task);
+    } else if (taskDeadline.isSame(today, "month")) {
+      categories.thisMonth.push(task);
+    } else if (taskDeadline.isSame(today.add(1, "month"), "month")) {
+      categories.nextMonth.push(task);
+    } else {
+      categories.later.push(task);
+    }
+  });
+
+  return categories;
+}
+
+// Controller function to get categorized tasks
+const getCategorizedTasks = (req, res) => {
+  const categorizedTasks = categorizeTasks(tasks);
+  res.json(categorizedTasks);
+};
+
+//Exporting all the functions
 module.exports = {
   createTask,
   getAllUserTask,
   getSingleTask,
   updateTask,
   deleteTask,
+  getCategorizedTasks,
 };
